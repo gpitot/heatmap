@@ -1,0 +1,55 @@
+<style>
+
+    .heatmap-area {
+        width:100%;
+        max-width: 900px;
+        position: relative;
+    }
+
+    .heatmap-area img {
+        width:100%;
+        height:auto;
+        z-index: 1;
+        position: relative;
+    }
+
+    canvas {
+        position:absolute;
+        top:0;
+        left:0;
+        z-index: 2;
+    }
+
+
+    #sign {
+        width:250px;
+        height:250px;
+        border-radius:50%;
+        background:red;
+        color:white;
+        font-size:30px;
+        display:flex;
+        flex-direction: column;
+        text-align:center;
+        justify-content: center;
+    }
+
+    
+    
+</style>
+
+<div class = "heatmap-area">
+    <img src = "redmap.jpg" id = "mapimg"/>
+    <canvas id = "heatmap"></canvas>
+</div>
+
+<div id = "sign">
+    <div class = "temp"></div>
+    <div class="city"></div>
+</div>
+
+
+<script src = "js/Map.js"></script>
+
+<script src = "js/Canvas.js"></script>
+<script src = "js/setup.js"></script>
