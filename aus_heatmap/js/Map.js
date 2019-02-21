@@ -7,25 +7,15 @@ class Map {
         this.sign = sign;
         this.dimensions = dimensions;
 
-        this.setUpRealSizes = this.setUpRealSizes.bind(this);
+        
 
         this.data.forEach((d)=>{
             d.color = this.getColorFromTemp(d.temp);
-            d.coords = this.setUpRealSizes(d);
             d.image = this.loadImages(d);
         });
     }
 
-    setUpRealSizes(state) {
-        const {x1, y1, x2, y2} = state.coords_percent;
-        return {
-            x1 : (x1 / 100) * this.dimensions.width,
-            y1 : (y1 / 100) * this.dimensions.height,
-            x2 : (x2 / 100) * this.dimensions.width,
-            y2 : (y2 / 100) * this.dimensions.width
-        }
-
-    }
+    
     getColorFromTemp(temp) {
         //max temp for now is 80
         return 255 - Math.ceil(255 * (temp / 60));
@@ -39,29 +29,27 @@ class Map {
     
 
 
-    mouseMove(coord) {
-        const closest = this.getState(coord);
-        if (closest !== this.current && closest !== null) {
+    mouseMove(rgb) {
+        const closest = this.getState(rgb);
+        if (closest !== this.current) {
             this.current = closest;
             this.updateSign();
 
-            if (this.current.image.complete) {
-                console.log('COMPLETE');
+            if (this.current === null || this.current.image.complete) {
                 this.drawHighlights(this.current);
             }
-            
-        }
+        } 
+
+
     }
 
 
-    getState(coord) {
+    getState(rgb) {
         //gets state of current pos
         const data = this.data;
         for (let i=0;i<data.length;i++) {
-            let c = data[i].coords;
-            if (coord.x >= c.x1 && coord.x <= c.x2 && coord.y >= c.y1 && coord.y <= c.y2) {
-                return data[i];
-            }
+            let c = data[i].detectColor;
+            if (rgb === c) return data[i];
         }
         return null;
     }
@@ -90,9 +78,14 @@ class Map {
 
 
     updateSign() {
+        if (this.current === null) {
+            this.sign.getElementsByClassName('.temp').innerHTML = '';
+            this.sign.getElementsByClassName('.city').innerHTML = '';
+            return;
+        }
         this.sign.style.background = `rgb(${this.current.color}, 0, 0)`;
         //this.sign.style.background = `rgb(240, 0, 0)`;
-        this.sign.querySelector('.temp').innerHTML = this.current.temp;
-        this.sign.querySelector('.city').innerHTML = this.current.city;
+        this.sign.getElementsByClassName('temp')[0].innerHTML = this.current.temp;
+        this.sign.getElementsByClassName('city')[0].innerHTML = this.current.city;
     }
 }

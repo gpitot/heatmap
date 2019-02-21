@@ -1,4 +1,3 @@
-const c = document.getElementById('heatmap');
 
 /*
 Sydney 43.4
@@ -16,19 +15,15 @@ Brisbane 34.8
 ///data 
 const states = [
     {
+        detectColor : '10000',
         state : 'wa',
         city : 'Perth',
         temp : 42.1,
-        coords_percent : {
-            x1 : 0,
-            y1: 11.6,
-            x2 : 38.6, 
-            y2: 73
-        },
-        src : 'redmap.jpg'
+        src : 'slices/wa.png'
     },
 
     {
+        detectColor : '00200',
         state : 'nt',
         city : 'Darwin',
         temp : 34.5,
@@ -38,61 +33,63 @@ const states = [
             x2 : 62, 
             y2: 45.3
         },
-        src : 'redmap.png'
+        src : 'slices/nt.png'
     },
 
     {
+        detectColor : '20000',
         state : 'sa',
         city : 'Adelaide',
         temp : 46.6,
-        coords_percent : {
-            x1 : 38.7,
-            y1: 45.4,
-            x2 : 67.5, 
-            y2: 79.3
-        },
-        src : 'ausmap.jpg'
+        src : 'slices/sa.png'
     },
 
     {
+        detectColor: '2001000',
         state : 'qld',
         city : 'Brisbane',
         temp : 34.8,
-        coords_percent : {
-            x1 : 63,
-            y1: 2.6,
-            x2 : 100, 
-            y2: 55
-        }
+        src : 'slices/qld.png'
     },
 
     {
+        detectColor : '00100',
         state : 'nsw',
         city : 'Sydney',
         temp : 43.4,
-        coords_percent : {
-            x1 : 69,
-            y1: 54,
-            x2 : 100, 
-            y2: 80
-        }
+        src : 'slices/nsw.png'
     },
 
     {
+        detectColor : '02000',
         state : 'tas',
         city : 'Hobart',
         temp : 37.9,
-        coords_percent : {
-            x1 : 73,
-            y1: 84,
-            x2 : 83, 
-            y2: 95
-        }
+        src : 'slices/tas.png'
+    },
+
+    {
+        detectColor : '01000',
+        state : 'vic',
+        city : 'Melbourne',
+        temp : 42.8,
+        src : 'slices/vic.png'
+    },
+
+    {
+        detectColor : '2550200',
+        state : 'act',
+        city : 'Canberra',
+        temp : 42.8,
+        src : 'slices/act.png'
     }
 ]
+console.log('load');
+const c = document.getElementById('heatmap');
+const d = document.getElementById('detect-heatmap');
 
 
 const sign = document.getElementById("sign");
 
 const map = new Map(states, sign, {width: mapimg.width, height:mapimg.height});
-const canvas = new Canvas(c, map, document.getElementById('mapimg'));
+const canvas = new Canvas(c, d, map, document.getElementById('mapimg'), document.getElementById('detect-mapimg'));

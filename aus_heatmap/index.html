@@ -4,6 +4,7 @@
         width:100%;
         max-width: 900px;
         position: relative;
+        margin-top:150px;
     }
 
     .heatmap-area img {
@@ -13,11 +14,24 @@
         position: relative;
     }
 
+    #detect-mapimg {
+        position:absolute;
+        width:100%;
+        z-index:0;
+        left:0;
+        top:0;
+        
+    }
+
     canvas {
         position:absolute;
         top:0;
         left:0;
         z-index: 2;
+    }
+
+    #detect-heatmap {
+        display:none;
     }
 
 
@@ -39,8 +53,10 @@
 </style>
 
 <div class = "heatmap-area">
-    <img src = "redmap.jpg" id = "mapimg"/>
+    <img src = "slices/base.png" id = "mapimg"/>
+    <img src = "slices/detect-base.png" id = "detect-mapimg"/>
     <canvas id = "heatmap"></canvas>
+    <canvas id = "detect-heatmap"></canvas>
 </div>
 
 <div id = "sign">
