@@ -196,7 +196,7 @@ function () {
 
       this.sign.style.background = "rgb(".concat(this.current.color, ", 0, 0)"); //this.sign.style.background = `rgb(240, 0, 0)`;
 
-      this.sign.getElementsByClassName('temp')[0].innerHTML = this.current.temp;
+      this.sign.getElementsByClassName('temp')[0].innerHTML = this.current.temp + '&deg; C';
       this.sign.getElementsByClassName('city')[0].innerHTML = this.current.city;
     }
   }]);
@@ -273,7 +273,7 @@ var states = [{
   temp: 42.8,
   src: 'images/act.png'
 }];
-console.log('load');
+console.log('[map] load');
 var c = document.getElementById('heatmap');
 var d = document.getElementById('detect-heatmap');
 var sign = document.getElementById("sign");
